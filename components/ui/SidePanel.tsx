@@ -31,7 +31,7 @@ export default function SidePanel({ open, onClose, children }: { open: boolean, 
             ✕
           </button>
         </div>
-        <div className="flex-1 bg-white">
+        <div className="flex-1 bg-[#18181b]">
           {children}
         </div>
       </div>

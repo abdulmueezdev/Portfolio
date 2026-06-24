@@ -4,6 +4,7 @@ import SidePanel from '@/components/ui/SidePanel'
 
 export default function AlucardSection() {
   const [open, setOpen] = useState(false)
+  const [iframeLoaded, setIframeLoaded] = useState(false)
 
   return (
     <section className="py-24 px-8 border-t border-white/10">
@@ -24,7 +25,7 @@ export default function AlucardSection() {
         <div className="flex gap-4">
           {/* Trigger button — terminal style */}
           <button
-            onClick={() => setOpen(true)}
+            onClick={() => { setOpen(true); setIframeLoaded(false); }}
             className="font-mono text-sm px-6 py-3 border border-[#6C5CE7] text-[#6C5CE7]
                        hover:bg-[#6C5CE7] hover:text-white transition-all duration-200"
           >
@@ -43,11 +44,23 @@ export default function AlucardSection() {
       </div>
 
       <SidePanel open={open} onClose={() => setOpen(false)}>
-        <iframe
-          src="https://ai-bot-psi-three.vercel.app"
-          className="w-full h-full border-0"
-          title="Alucard — Kafka AI Chatbot"
-        />
+        <div className="relative w-full h-full bg-[#18181b]">
+          {!iframeLoaded && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="flex flex-col items-center gap-4">
+                <div className="w-8 h-8 border-2 border-[#55E6C1] border-t-transparent rounded-full animate-spin"></div>
+                <p className="font-mono text-xs text-[#55E6C1]">LOADING KAFKA_PROTOCOL...</p>
+              </div>
+            </div>
+          )}
+          <iframe
+            src="https://ai-bot-psi-three.vercel.app"
+            className={`w-full h-full border-0 transition-opacity duration-500 bg-[#18181b] ${iframeLoaded ? 'opacity-100' : 'opacity-0'}`}
+            title="Alucard — Kafka AI Chatbot"
+            onLoad={() => setIframeLoaded(true)}
+            allow="clipboard-write"
+          />
+        </div>
       </SidePanel>
     </section>
   )

@@ -26,8 +26,25 @@ const projects: Project[] = [
     image_url: '/images/alucard-preview.png',
     tech_stack: ['FastAPI', 'Supabase', 'Groq', 'Next.js'],
     featured: true,
+  },
+  {
+    id: '2',
+    title: 'EduIG-Pipeline',
+    description: 'An educational Instagram content generation pipeline.',
+    category: 'ai',
+    github_url: 'https://github.com/abdulmueezdev/EduIG-Pipeline',
+    tech_stack: ['Python', 'Automation'],
+    featured: false,
+  },
+  {
+    id: '3',
+    title: 'Nabeel Photographic Moments',
+    description: 'A photography portfolio showcasing memorable moments.',
+    category: 'web',
+    github_url: 'https://github.com/abdulmueezdev/nabeel-photographic-moments',
+    tech_stack: ['Next.js', 'React'],
+    featured: false,
   }
-  // New projects added here (or fetched from Supabase) will automatically appear
 ]
 
 const featuredProjects = projects.filter(p => p.featured)
@@ -51,9 +68,18 @@ export default function Portfolio() {
       <div className="max-w-6xl mx-auto mb-24">
         <p className="font-mono text-xs text-[#55E6C1] mb-4">/ PORTFOLIO</p>
         <h1 className="font-display text-5xl mb-8">Selected Works.</h1>
-        <p className="text-zinc-400 text-lg leading-relaxed max-w-2xl mb-16">
+        <p className="text-zinc-400 text-lg leading-relaxed max-w-2xl mb-8">
           A collection of projects across web development, AI integration, and systems programming.
         </p>
+        <div className="mb-16">
+          <a
+            href="/files/abdulmueez-cv.pdf"
+            download="Abdul-Mueez-Shahid-CV.pdf"
+            className="inline-block font-mono text-sm px-6 py-3 border border-[#55E6C1] text-[#55E6C1] hover:bg-[#55E6C1] hover:text-[#2F3640] transition-all duration-200 rounded-sm"
+          >
+            ↓ Download CV
+          </a>
+        </div>
 
         {/* OrbitCardStack Section */}
         {featuredProjects.length > 0 && (

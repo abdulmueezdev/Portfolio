@@ -106,13 +106,6 @@ export default function Home() {
                   <Link href="/contact" className="border border-white/20 px-8 py-3 hover:bg-white/5 transition-colors rounded-sm font-mono text-sm">
                     Contact Me →
                   </Link>
-                  <a
-                    href="/files/abdulmueez-cv.pdf"
-                    download="Abdul-Mueez-Shahid-CV.pdf"
-                    className="font-mono text-sm px-6 py-3 border border-[#55E6C1] text-[#55E6C1] hover:bg-[#55E6C1] hover:text-[#2F3640] transition-all duration-200 rounded-sm"
-                  >
-                    ↓ Download CV
-                  </a>
                 </motion.div>
               </div>
             </motion.div>
