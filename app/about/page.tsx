@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 import PillNav from '@/components/layout/PillNav'
 import Footer from '@/components/layout/Footer'
 import LogoLoop from '@/components/ui/LogoLoop'
@@ -51,13 +52,12 @@ export default function About() {
               I&apos;m Abdul-Mueez, a Computer Science student passionate about building scalable web applications and robust systems.
               From low-level Assembly to high-level cloud architecture, I believe in understanding the full stack to create better software.
             </p>
-            <a
-              href="/files/abdulmueez-cv.pdf"
-              download="Abdul-Mueez-Shahid-CV.pdf"
+            <Link
+              href="/contact"
               className="inline-block font-mono text-sm px-6 py-3 border border-[#55E6C1] text-[#55E6C1] hover:bg-[#55E6C1] hover:text-[#2F3640] transition-all duration-200"
             >
-              ↓ Download CV
-            </a>
+              → Contact Me
+            </Link>
           </div>
           {/* Image Masked Box */}
           <div className="relative w-full aspect-[4/5] bg-[#353B48] border-2 border-[#7F8FA6] p-2 overflow-hidden flex justify-center items-center group">

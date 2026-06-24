@@ -2,7 +2,14 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 
-export default function Dashboard() {
+export default async function Dashboard() {
+  const cookieStore = await cookies()
+  const session = cookieStore.get('admin_session')
+  
+  if (!session || session.value !== (process.env.ADMIN_SECRET || 'secret')) {
+    redirect('/admin')
+  }
+
   return (
     <main className="min-h-screen p-8 bg-[#2F3640]">
       <div className="max-w-6xl mx-auto">
