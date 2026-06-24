@@ -9,12 +9,13 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://portfolio-six-cyan-3moz5y68h4.vercel.app'),
   title: "Abdul-Mueez Shahid | Portfolio",
   description: "A Computer Science student merging theoretical depth with practical deployment.",
   openGraph: {
     title: "Abdul-Mueez Shahid | Portfolio",
     description: "A Computer Science student merging theoretical depth with practical deployment.",
-    url: "https://abdulmueezdev.github.io",
+    url: "https://portfolio-six-cyan-3moz5y68h4.vercel.app",
     siteName: "Abdul-Mueez Portfolio",
     images: [
       {
@@ -34,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${spaceGrotesk.className} scroll-smooth antialiased`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${spaceGrotesk.variable} ${spaceGrotesk.className} antialiased`}>
       <body className="min-h-screen flex flex-col bg-[#2F3640] text-white">
         {children}
       </body>
