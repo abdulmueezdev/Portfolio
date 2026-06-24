@@ -49,12 +49,6 @@ export default function Footer() {
           <p className="text-xs text-zinc-600">
             © 2025 Abdul-Mueez. Built with Logic & Design.
           </p>
-          <Link
-            href="/admin"
-            className="text-[10px] text-zinc-800 hover:text-zinc-600 transition-colors font-mono"
-          >
-            [admin]
-          </Link>
         </div>
       </div>
     </footer>

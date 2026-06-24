@@ -1,66 +1,18 @@
 'use client'
 import PillNav from '@/components/layout/PillNav'
 import Footer from '@/components/layout/Footer'
-import { useState, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 
-type FormState = 'idle' | 'loading' | 'success' | 'error'
-
-function validateEmail(email: string): boolean {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-}
-
 export default function Contact() {
-  const [state, setState] = useState<FormState>('idle')
-  const [errors, setErrors] = useState<Record<string, string>>({})
+  const [isSent, setIsSent] = useState(false)
 
-  const validate = useCallback((formData: FormData): boolean => {
-    const newErrors: Record<string, string> = {}
-    const name = (formData.get('name') as string)?.trim()
-    const email = (formData.get('email') as string)?.trim()
-    const message = (formData.get('message') as string)?.trim()
-
-    if (!name) newErrors.name = 'Name is required'
-    if (!email) newErrors.email = 'Email is required'
-    else if (!validateEmail(email)) newErrors.email = 'Invalid email format'
-    if (!message) newErrors.message = 'Message is required'
-    else if (message.length < 10) newErrors.message = 'Message must be at least 10 characters'
-
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
-  }, [])
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const formData = new FormData(e.currentTarget)
-
-    if (!validate(formData)) return
-
-    setState('loading')
-
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        body: JSON.stringify(Object.fromEntries(formData)),
-        headers: { 'Content-Type': 'application/json' }
-      })
-
-      if (!res.ok) throw new Error('Failed to send')
-      setState('success')
-      ;(e.target as HTMLFormElement).reset()
-      setErrors({})
-    } catch {
-      setState('error')
+  useEffect(() => {
+    if (window.location.search.includes('sent=true')) {
+      setIsSent(true)
     }
-  }
-
-  const buttonText = {
-    idle: '[ EXECUTE_SEND ]',
-    loading: '[ TRANSMITTING... ]',
-    success: '[ MESSAGE_SENT ✓ ]',
-    error: '[ ERROR — RETRY ]',
-  }
+  }, [])
 
   return (
     <main className="flex-grow pt-32 pb-24 px-8 md:px-16 w-full max-w-7xl mx-auto flex flex-col md:grid md:grid-cols-12 gap-8">
@@ -106,76 +58,61 @@ export default function Contact() {
               <div className="w-3 h-3 rounded-full bg-[#27C93F]"></div>
             </div>
 
-            <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-8" noValidate>
+            <form action="https://formsubmit.co/abdulmueezshahid550@gmail.com" method="POST" className="mt-8 flex flex-col gap-8">
+              <input type="hidden" name="_next" value="https://portfolio-kx7f1jhe3-abdulmueezs-projects-99b2e67f.vercel.app/contact?sent=true" />
+              
               <div className="flex flex-col gap-2 relative">
                 <label className="font-mono text-xs text-[#c6bfff] uppercase" htmlFor="name">Full Name_</label>
                 <input 
-                  className={`bg-transparent border-b-2 text-white font-mono text-sm py-2 placeholder-zinc-500 focus:outline-none focus:border-[#6C5CE7] transition-colors ${errors.name ? 'border-[#FF7675]' : 'border-[#7F8FA6]'}`}
+                  className="bg-transparent border-b-2 text-white font-mono text-sm py-2 placeholder-zinc-500 focus:outline-none focus:border-[#6C5CE7] transition-colors border-[#7F8FA6]"
                   id="name" 
                   name="name"
                   placeholder="Enter your identifier" 
                   type="text"
-                  onChange={() => errors.name && setErrors(e => ({ ...e, name: '' }))}
+                  required
                 />
-                {errors.name && <p className="text-[#FF7675] text-xs font-mono absolute -bottom-5">{errors.name}</p>}
               </div>
 
               <div className="flex flex-col gap-2 relative mt-2">
                 <label className="font-mono text-xs text-[#c6bfff] uppercase" htmlFor="email">Email Address_</label>
                 <input 
-                  className={`bg-transparent border-b-2 text-white font-mono text-sm py-2 placeholder-zinc-500 focus:outline-none focus:border-[#6C5CE7] transition-colors ${errors.email ? 'border-[#FF7675]' : 'border-[#7F8FA6]'}`}
+                  className="bg-transparent border-b-2 text-white font-mono text-sm py-2 placeholder-zinc-500 focus:outline-none focus:border-[#6C5CE7] transition-colors border-[#7F8FA6]"
                   id="email" 
                   name="email"
                   placeholder="user@domain.com" 
                   type="email"
-                  onChange={() => errors.email && setErrors(e => ({ ...e, email: '' }))}
+                  required
                 />
-                {errors.email && <p className="text-[#FF7675] text-xs font-mono absolute -bottom-5">{errors.email}</p>}
               </div>
 
               <div className="flex flex-col gap-2 relative mt-2">
                 <label className="font-mono text-xs text-[#c6bfff] uppercase" htmlFor="message">Message Payload_</label>
                 <textarea 
-                  className={`bg-transparent border-b-2 text-white font-mono text-sm py-2 placeholder-zinc-500 focus:outline-none focus:border-[#6C5CE7] transition-colors resize-none ${errors.message ? 'border-[#FF7675]' : 'border-[#7F8FA6]'}`}
+                  className="bg-transparent border-b-2 text-white font-mono text-sm py-2 placeholder-zinc-500 focus:outline-none focus:border-[#6C5CE7] transition-colors resize-none border-[#7F8FA6]"
                   id="message" 
                   name="message"
                   placeholder="Input parameters..." 
                   rows={4}
-                  onChange={() => errors.message && setErrors(e => ({ ...e, message: '' }))}
+                  required
                 ></textarea>
-                {errors.message && <p className="text-[#FF7675] text-xs font-mono absolute -bottom-5">{errors.message}</p>}
               </div>
 
               <button 
-                className={`font-mono text-sm text-white uppercase py-4 px-8 mt-4 transition-all duration-200 border-2 active:translate-y-0.5 active:translate-x-0.5 disabled:opacity-50
-                  ${state === 'error' ? 'bg-[#FF7675] border-[#FF7675] hover:shadow-[4px_4px_0px_0px_#0d141d]' :
-                    state === 'success' ? 'bg-[#55E6C1] text-[#0d141d] border-[#55E6C1]' :
-                    'bg-[#6C5CE7] border-[#6C5CE7] hover:-translate-y-0.5 hover:-translate-x-0.5 hover:shadow-[4px_4px_0px_0px_#55E6C1]'}`}
+                className="font-mono text-sm text-white uppercase py-4 px-8 mt-4 transition-all duration-200 border-2 active:translate-y-0.5 active:translate-x-0.5 bg-[#6C5CE7] border-[#6C5CE7] hover:-translate-y-0.5 hover:-translate-x-0.5 hover:shadow-[4px_4px_0px_0px_#55E6C1]"
                 type="submit"
-                disabled={state === 'loading'}
               >
-                {buttonText[state]}
+                [ EXECUTE_SEND ]
               </button>
 
               <AnimatePresence>
-                {state === 'success' && (
+                {isSent && (
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
                     className="font-mono text-[#55E6C1] text-sm text-center mt-2"
                   >
-                    &gt; TRANSMISSION_COMPLETE: Will respond within 24h.
-                  </motion.div>
-                )}
-                {state === 'error' && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    className="font-mono text-[#FF7675] text-sm text-center mt-2"
-                  >
-                    &gt; TRANSMISSION_FAILED: Connection error.
+                    &gt; MESSAGE_TRANSMITTED_SUCCESSFULLY
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -194,17 +131,25 @@ export default function Contact() {
               <p className="text-[#ffb3b0] mt-2">email: <a className="hover:underline" href="mailto:abdulmueezshahid550@gmail.com">abdulmueezshahid550@gmail.com</a></p>
             </div>
 
-            {/* Map Image Placeholder */}
-            <div className="h-64 relative overflow-hidden border-2 border-[#7F8FA6] bg-[#353B48]">
-              <Image 
-                className="object-cover opacity-60" 
-                src="https://abdulmueezdev.github.io/map-placeholder.jpg" 
-                alt="Map of Peshawar"
-                fill
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0d141d] to-transparent pointer-events-none"></div>
-              <div className="absolute bottom-4 left-4 font-mono text-xs text-[#c6bfff] bg-[#2e353f] px-2 py-1 border border-[#7F8FA6]">
-                LOC_DATA: PESH, PK
+            {/* Terminal Info Panel */}
+            <div className="bg-[#353B48] border-2 border-[#7F8FA6] p-6 font-mono text-sm text-zinc-300">
+              <p className="text-[#55E6C1] mb-4">&gt; STATUS: ONLINE</p>
+              <div className="flex flex-col gap-3">
+                <div className="flex">
+                  <span className="text-[#c6bfff] w-32">GITHUB:</span>
+                  <a href="https://github.com/abdulmueezdev" target="_blank" rel="noreferrer" className="hover:underline hover:text-[#55E6C1] transition-colors">/abdulmueezdev</a>
+                </div>
+                <div className="flex">
+                  <span className="text-[#c6bfff] w-32">LINKEDIN:</span>
+                  <a href="https://linkedin.com/in/abdulmueezdev" target="_blank" rel="noreferrer" className="hover:underline hover:text-[#55E6C1] transition-colors">/in/abdulmueezdev</a>
+                </div>
+                <div className="flex">
+                  <span className="text-[#c6bfff] w-32">INSTAGRAM:</span>
+                  <a href="https://instagram.com/abdul.mueez.shahid" target="_blank" rel="noreferrer" className="hover:underline hover:text-[#55E6C1] transition-colors">/abdul.mueez.shahid</a>
+                </div>
+                <div className="flex mt-4 pt-4 border-t border-[#7F8FA6]/30">
+                  <span className="text-zinc-500">AVAILABLE_FOR_HIRE: TRUE</span>
+                </div>
               </div>
             </div>
           </div>
