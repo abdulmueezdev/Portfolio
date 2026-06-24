@@ -1,65 +1,112 @@
-import Image from "next/image";
+'use client'
+import { useState, useEffect } from 'react'
+import dynamic from 'next/dynamic'
+import { motion, AnimatePresence } from 'framer-motion'
+import PillNav from '@/components/layout/PillNav'
+import Footer from '@/components/layout/Footer'
+import AlucardSection from '@/components/sections/AlucardSection'
+
+const HeroScene = dynamic(() => import('@/components/three/HeroScene'), { ssr: false })
 
 export default function Home() {
+  const [booted, setBooted] = useState(false)
+
+  useEffect(() => {
+    document.body.style.overflow = booted ? 'auto' : 'hidden'
+  }, [booted])
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main>
+      <PillNav isVisible={booted} />
+      
+      {/* Hero — always rendered */}
+      <section className="relative h-screen w-full">
+        <div className="absolute inset-0">
+          <HeroScene onBootComplete={() => setBooted(true)} />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+
+        {/* Pre-boot prompt overlay */}
+        <AnimatePresence>
+          {!booted && (
+            <motion.div
+              className="absolute bottom-12 left-1/2 -translate-x-1/2 font-mono text-sm text-[#55E6C1]"
+              animate={{ opacity: [0.3, 1, 0.3] }}
+              transition={{ repeat: Infinity, duration: 1.5 }}
+              exit={{ opacity: 0 }}
+            >
+              &gt; CLICK TO BOOT_
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Post-boot hero text */}
+        <AnimatePresence>
+          {booted && (
+            <motion.div
+              className="absolute inset-0 flex flex-col justify-center px-16 pointer-events-none"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8 }}
+            >
+              <div className="max-w-2xl mt-32 pointer-events-auto">
+                <motion.p 
+                  initial={{ y: 40, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.9, duration: 0.4 }}
+                  className="font-mono text-[#6C5CE7] text-sm mb-4"
+                >
+                  [ CS Student · 3rd Semester ]
+                </motion.p>
+                <motion.h1 
+                  initial={{ y: 40, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.96, duration: 0.4 }}
+                  className="font-display text-8xl mb-6 tracking-tight"
+                >
+                  ABDUL-MUEEZ.
+                </motion.h1>
+                <motion.h2 
+                  initial={{ y: 40, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 1.02, duration: 0.4 }}
+                  className="text-3xl text-zinc-300 mb-6 font-display"
+                >
+                  Code. Cloud. Craft...
+                </motion.h2>
+                <motion.p 
+                  initial={{ y: 40, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 1.08, duration: 0.4 }}
+                  className="text-zinc-400 max-w-xl mb-10 leading-relaxed text-lg"
+                >
+                  A Computer Science student merging theoretical depth
+                  with practical deployment. Specialising in Web Development,
+                  AWS, and System Architecture.
+                </motion.p>
+                <motion.div 
+                  initial={{ y: 40, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 1.14, duration: 0.4 }}
+                  className="flex gap-4"
+                >
+                  <button className="bg-[#6C5CE7] text-white px-8 py-3 hover:bg-[#5a4cdb] transition-colors rounded-sm">
+                    Explore Work →
+                  </button>
+                  <button className="border border-white/20 px-8 py-3 hover:bg-white/5 transition-colors rounded-sm">
+                    Contact Me →
+                  </button>
+                </motion.div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </section>
+
+      {/* Everything below — hidden until booted */}
+      <div className={booted ? 'block' : 'hidden'}>
+        <AlucardSection />
+        <Footer />
+      </div>
+    </main>
+  )
 }
