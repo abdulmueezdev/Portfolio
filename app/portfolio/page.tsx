@@ -43,6 +43,16 @@ const projects: Project[] = [
     github_url: 'https://github.com/abdulmueezdev/nabeel-photographic-moments',
     tech_stack: ['Next.js', 'React'],
     featured: false,
+  },
+  {
+    id: '4',
+    title: 'LeadMap',
+    description: 'Automated map scraping and lead scoring engine.',
+    category: 'systems',
+    live_url: 'https://leadmap-xi.vercel.app',
+    github_url: 'https://github.com/abdulmueezdev/leadmap',
+    tech_stack: ['Python', 'Web Scraping', 'Next.js'],
+    featured: false,
   }
 ]
 
