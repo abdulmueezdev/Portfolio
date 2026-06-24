@@ -30,10 +30,9 @@ const projects: Project[] = [
   {
     id: '2',
     title: 'EduIG-Pipeline',
-    description: 'An educational Instagram content generation pipeline.',
+    description: 'An authenticated Instagram data extraction pipeline built with Python, Playwright, and Supabase. Features anti-detection browser automation, session management, and authenticated content extraction with a frontend dashboard.',
     category: 'ai',
-    github_url: 'https://github.com/abdulmueezdev/EduIG-Pipeline',
-    tech_stack: ['Python', 'Automation'],
+    tech_stack: ['Python', 'Automation', 'Playwright', 'Supabase'],
     featured: false,
   },
   {
