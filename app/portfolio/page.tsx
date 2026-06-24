@@ -3,7 +3,7 @@ import PillNav from '@/components/layout/PillNav'
 import Footer from '@/components/layout/Footer'
 import { OrbitCardStack } from '@/components/ui/OrbitCardStack'
 
-interface Project {
+export interface Project {
   id: string
   title: string
   description: string
@@ -15,7 +15,7 @@ interface Project {
   featured: boolean
 }
 
-const projects: Project[] = [
+export const projects: Project[] = [
   {
     id: '1',
     title: 'Alucard',
@@ -47,11 +47,10 @@ const projects: Project[] = [
   {
     id: '4',
     title: 'LeadMap',
-    description: 'Automated map scraping and lead scoring engine.',
-    category: 'systems',
-    live_url: 'https://leadmap-xi.vercel.app',
+    description: 'Automated map scraping and lead scoring engine. Fetches leads from Google Places API, enriches contact details and tech stack, scores leads using customizable rule sets, and generates personalized outreach email drafts.',
+    category: 'web',
     github_url: 'https://github.com/abdulmueezdev/leadmap',
-    tech_stack: ['Python', 'Web Scraping', 'Next.js'],
+    tech_stack: ['Python', 'FastAPI', 'Celery', 'PostgreSQL', 'Redis'],
     featured: false,
   }
 ]

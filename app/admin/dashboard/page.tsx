@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
+import { projects } from '@/app/portfolio/page'
 
 export default async function Dashboard() {
   const cookieStore = await cookies()
@@ -32,9 +33,6 @@ export default async function Dashboard() {
 
         <div className="flex justify-between items-end mb-8">
           <h2 className="text-xl text-white font-display">Projects</h2>
-          <button className="bg-[#55E6C1] text-[#2F3640] px-4 py-2 font-mono text-sm hover:bg-white transition-colors">
-            + ADD PROJECT
-          </button>
         </div>
 
         <div className="border border-white/10 bg-white/5 overflow-hidden">
@@ -45,20 +43,25 @@ export default async function Dashboard() {
                 <th className="p-4 font-normal">CATEGORY</th>
                 <th className="p-4 font-normal">LIVE URL</th>
                 <th className="p-4 font-normal">GITHUB</th>
-                <th className="p-4 font-normal text-right">ACTIONS</th>
+                <th className="p-4 font-normal text-right">FEATURED</th>
               </tr>
             </thead>
             <tbody>
-              <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                <td className="p-4 text-white">Alucard</td>
-                <td className="p-4 text-zinc-400">AI</td>
-                <td className="p-4 text-[#55E6C1] text-sm"><a href="https://ai-bot-psi-three.vercel.app" target="_blank" rel="noreferrer">vercel.app</a></td>
-                <td className="p-4 text-zinc-400 text-sm"><a href="https://github.com/abdulmueezdev" target="_blank" rel="noreferrer">github.com</a></td>
-                <td className="p-4 text-right">
-                  <button className="text-zinc-500 hover:text-white mr-4 transition-colors text-sm">Edit</button>
-                  <button className="text-[#FF7675] hover:text-red-400 transition-colors text-sm">Delete</button>
-                </td>
-              </tr>
+              {projects.map((project) => (
+                <tr key={project.id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                  <td className="p-4 text-white">{project.title}</td>
+                  <td className="p-4 text-zinc-400">{project.category}</td>
+                  <td className="p-4 text-[#55E6C1] text-sm">
+                    {project.live_url ? <a href={project.live_url} target="_blank" rel="noreferrer">vercel.app</a> : <span className="text-zinc-600">-</span>}
+                  </td>
+                  <td className="p-4 text-zinc-400 text-sm">
+                    {project.github_url ? <a href={project.github_url} target="_blank" rel="noreferrer">github.com</a> : <span className="text-zinc-600">-</span>}
+                  </td>
+                  <td className="p-4 text-right">
+                    {project.featured ? <span className="text-[#55E6C1] text-sm font-mono">YES</span> : <span className="text-zinc-600 text-sm font-mono">NO</span>}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
