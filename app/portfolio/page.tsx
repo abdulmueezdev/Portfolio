@@ -103,15 +103,24 @@ export default function Portfolio() {
         <div>
           <h2 className="font-mono text-sm text-zinc-500 mb-8 border-b border-white/10 pb-4">OTHER PROJECTS</h2>
           {otherProjects.length > 0 ? (
-            <div className="flex justify-center items-center py-12">
-              <OrbitCardStack items={otherProjects.map(p => ({
-                name: p.title,
-                role: p.description.split('.')[0] || 'Project',
-                description: p.description,
-                image: p.image_url || '',
-                accent: '#55E6C1',
-                stat: p.github_url ? 'View Source' : 'In Development',
-              }))} defaultActiveIndex={0} spread={168} lift={34} />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-12">
+              {otherProjects.map((p) => (
+                <div key={p.id} className="flex justify-center items-center">
+                  <OrbitCardStack 
+                    items={[{
+                      name: p.title,
+                      role: p.description.split('.')[0] || 'Project',
+                      description: p.description,
+                      image: p.image_url || '',
+                      accent: '#55E6C1',
+                      stat: p.github_url ? 'View Source' : 'In Development',
+                    }]} 
+                    defaultActiveIndex={0} 
+                    spread={0} 
+                    lift={0} 
+                  />
+                </div>
+              ))}
             </div>
           ) : (
             <div className="font-mono text-center py-24 text-zinc-500">
