@@ -82,7 +82,7 @@ export default function Portfolio() {
         <div className="mb-16">
           <a
             href="/files/abdulmueez-cv.pdf"
-            download="Abdul-Mueez-Shahid-CV.pdf"
+            download="Abdul-Mueez-CV.pdf"
             className="inline-block font-mono text-sm px-6 py-3 border border-[#55E6C1] text-[#55E6C1] hover:bg-[#55E6C1] hover:text-[#2F3640] transition-all duration-200 rounded-sm"
           >
             ↓ Download CV

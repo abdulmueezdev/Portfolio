@@ -4,8 +4,8 @@ import PillNav from '@/components/layout/PillNav'
 import Footer from '@/components/layout/Footer'
 import LogoLoop from '@/components/ui/LogoLoop'
 import Image from 'next/image'
-import { FaMicrochip } from 'react-icons/fa'
-import { SiCplusplus, SiJavascript, SiReact, SiNodedotjs, SiTypescript, SiPython, SiGit, SiDocker, SiLinux } from 'react-icons/si'
+import { FaMicrochip, FaDatabase } from 'react-icons/fa'
+import { SiCplusplus, SiJavascript, SiReact, SiNodedotjs, SiTypescript, SiPython, SiGit, SiDocker, SiLinux, SiSupabase } from 'react-icons/si'
 import { MdAccountBalance, MdGroups } from 'react-icons/md'
 
 const techLogos = [
@@ -19,6 +19,8 @@ const techLogos = [
   { node: <SiGit size={32} />, title: 'Git' },
   { node: <SiDocker size={32} />, title: 'Docker' },
   { node: <SiLinux size={32} />, title: 'Linux' },
+  { node: <SiSupabase size={32} />, title: 'Supabase' },
+  { node: <FaDatabase size={32} />, title: 'Database' },
 ]
 
 export default function About() {
@@ -46,7 +48,7 @@ export default function About() {
               <span className="font-mono text-xs text-white uppercase tracking-widest">Sys.Init()</span>
             </div>
             <h1 className="font-display text-5xl md:text-6xl text-white uppercase border-l-4 border-[#6C5CE7] pl-4">
-              Abdul-Mueez Shahid
+              Abdul-Mueez
             </h1>
             <p className="text-zinc-400 text-lg leading-relaxed max-w-xl">
               I&apos;m Abdul-Mueez, a Computer Science student passionate about building scalable web applications and robust systems.
@@ -71,8 +73,8 @@ export default function About() {
             <div className="relative w-[85%] h-[85%] border-2 border-[#6C5CE7] bg-[#2e353f] overflow-hidden z-10 transition-transform duration-500 group-hover:scale-[1.02]">
               <Image
                 className="w-full h-full object-cover grayscale mix-blend-luminosity opacity-80"
-                src="https://abdulmueezdev.github.io/image.png"
-                alt="Abdul-Mueez Shahid"
+                src="/images/about-profile.png"
+                alt="Abdul-Mueez"
                 fill
                 priority
               />
@@ -88,11 +90,11 @@ export default function About() {
               <span className="font-mono text-xs text-zinc-400 mt-2 uppercase tracking-wide">Years of Experience</span>
             </div>
             <div className="flex flex-col items-center justify-center px-4 text-center">
-              <span className="font-display text-[40px] text-[#55E6C1] leading-none">4+</span>
+              <span className="font-display text-[40px] text-[#55E6C1] leading-none">6+</span>
               <span className="font-mono text-xs text-zinc-400 mt-2 uppercase tracking-wide">Projects</span>
             </div>
             <div className="flex flex-col items-center justify-center px-4 text-center">
-              <span className="font-display text-[40px] text-[#55E6C1] leading-none">7+</span>
+              <span className="font-display text-[40px] text-[#55E6C1] leading-none">9+</span>
               <span className="font-mono text-xs text-zinc-400 mt-2 uppercase tracking-wide">Technologies</span>
             </div>
             <div className="flex flex-col items-center justify-center px-4 text-center">
