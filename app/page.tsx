@@ -98,9 +98,18 @@ export default function Home() {
     }
   }, [])
 
+  const [hasSkipped, setHasSkipped] = useState(false)
+
   // Lock scroll immediately on mount — release only after boot
   useEffect(() => {
-    document.body.style.overflow = 'hidden'
+    if (sessionStorage.getItem("portfolioEntryCompleted") === "true") {
+      setHasSkipped(true)
+      setClicked(true)
+      setBooted(true)
+    } else {
+      document.body.style.overflow = 'hidden'
+    }
+
     return () => {
       document.body.style.overflow = 'auto'
     }
@@ -121,6 +130,7 @@ export default function Home() {
 
     setTimeout(() => {
       setBooted(true)
+      sessionStorage.setItem("portfolioEntryCompleted", "true")
     }, 600)
   }
 
@@ -140,16 +150,17 @@ export default function Home() {
         <div className="absolute inset-0 bg-[#0a0a0a]/80 -z-10 backdrop-blur-sm"></div>
 
         {/* Interaction Area */}
-        <div 
-          onClick={handleBootClick}
-          className="absolute right-0 top-0 w-1/2 h-full flex items-center justify-center cursor-pointer z-20 transition-transform duration-500 ease-in-out hover:scale-105"
-          style={{
-            transform: clicked ? 'scale(2) translate(20%, -20%)' : 'none',
-            filter: clicked ? 'contrast(200%) hue-rotate(90deg)' : 'none',
-            opacity: clicked ? 0.1 : 1,
-            pointerEvents: clicked ? 'none' : 'auto',
-          }}
-        >
+        {!hasSkipped && (
+          <div 
+            onClick={handleBootClick}
+            className="absolute right-0 top-0 w-1/2 h-full flex items-center justify-center cursor-pointer z-20 transition-transform duration-500 ease-in-out hover:scale-105"
+            style={{
+              transform: clicked ? 'scale(2) translate(20%, -20%)' : 'none',
+              filter: clicked ? 'contrast(200%) hue-rotate(90deg)' : 'none',
+              opacity: clicked ? 0.1 : 1,
+              pointerEvents: clicked ? 'none' : 'auto',
+            }}
+          >
           {/* Click Prompt (Initial State) */}
           <AnimatePresence>
             {!clicked && (
@@ -167,7 +178,8 @@ export default function Home() {
               </motion.div>
             )}
           </AnimatePresence>
-        </div>
+          </div>
+        )}
 
         {/* Post-boot hero text */}
         <AnimatePresence>
@@ -185,7 +197,7 @@ export default function Home() {
                   transition={{ delay: 0.1, duration: 0.4 }}
                   className="font-mono text-[#6C5CE7] text-sm mb-4 inline-flex items-center gap-2 bg-transparent border-l-4 border-[#6C5CE7] pl-4 py-1"
                 >
-                  <span className="tracking-widest uppercase">&gt;&gt; USER: [ CS Student · 3rd Semester ]</span>
+                  <span className="tracking-widest uppercase">&gt;&gt; USER: [ COMPUTER SCIENCE STUDENT ]</span>
                 </motion.p>
                 <motion.h1
                   initial={{ y: 40, opacity: 0 }}
