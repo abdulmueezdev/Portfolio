@@ -148,6 +148,10 @@ export function OrbitCardStack({
           if (expanded) {
             x = (index - center) * spread;
             r = (index - center) * 12;
+          } else {
+            // Un-expanded: fan out slightly so they don't perfectly overlap
+            x = offset * 24;  // Slight shift to the right
+            r = offset * 4;   // Slight tilt
           }
 
           const scale = expanded ? 1 : 1 - distanceToActive * 0.05;
