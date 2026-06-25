@@ -41,7 +41,7 @@ export default function AlucardSection() {
           {/* Latency Metric Card */}
           <div className="border border-white/10 p-6 relative">
             <p className="font-mono text-[10px] text-zinc-500 mb-4 tracking-widest">LATENCY_METRIC()</p>
-            <div className="font-display text-5xl text-white mb-4 tracking-tighter">&lt;400MS</div>
+            <div className="font-display text-5xl text-white mb-4 tracking-tighter glitch-text w-max">&lt;400MS</div>
             <p className="font-mono text-xs text-zinc-400">Avg TTFB for RAG pipeline.</p>
             <div className="absolute top-4 right-4 w-5 h-5 border border-zinc-600 rounded-full flex items-center justify-center text-[8px] text-zinc-500 italic">i</div>
           </div>
