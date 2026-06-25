@@ -133,6 +133,12 @@ export function OrbitCardStack({
       onMouseLeave={() => {
         collapseTimeoutRef.current = window.setTimeout(() => setExpanded(false), 200);
       }}
+      onClick={() => {
+        if (!expanded) {
+          if (collapseTimeoutRef.current) window.clearTimeout(collapseTimeoutRef.current);
+          setExpanded(true);
+        }
+      }}
     >
       <div className="relative mb-8 grid h-[320px] w-full max-w-[280px] place-items-center">
         {safeItems.map((item, index) => {
@@ -161,7 +167,7 @@ export function OrbitCardStack({
             <motion.div
               key={item.name}
               className={cn(
-                "absolute inset-0 flex origin-bottom cursor-pointer flex-col rounded-[2rem] border border-black/10 bg-[#f7f5ef] p-3 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.15)] outline-none will-change-transform focus-visible:ring-2 focus-visible:ring-zinc-400",
+                "absolute inset-0 flex origin-bottom cursor-pointer flex-col rounded-[2rem] border border-black/10 bg-[#f7f5ef] p-3 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.15)] outline-none will-change-transform focus-visible:ring-2 focus-visible:ring-zinc-400 touch-manipulation",
                 !expanded && !isActive && "pointer-events-none",
                 cardClassName
               )}
@@ -174,11 +180,15 @@ export function OrbitCardStack({
                 scale,
               }}
               transition={transition}
-              onClick={() => expanded && activateCard(item, index)}
+              onClick={() => {
+                if (!expanded) setExpanded(true);
+                activateCard(item, index);
+              }}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
-                  expanded && activateCard(item, index);
+                  if (!expanded) setExpanded(true);
+                  activateCard(item, index);
                 }
               }}
               tabIndex={expanded ? 0 : -1}

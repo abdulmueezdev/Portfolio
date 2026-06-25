@@ -203,7 +203,7 @@ export default function Home() {
                   initial={{ y: 40, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.16, duration: 0.4 }}
-                  className="font-display text-6xl md:text-8xl mb-6 tracking-tight text-white glitch-text cursor-crosshair w-max"
+                  className="font-display text-5xl md:text-8xl mb-6 tracking-tight text-white glitch-text cursor-crosshair break-words max-w-full"
                 >
                   ABDUL-MUEEZ.
                 </motion.h1>
@@ -211,7 +211,7 @@ export default function Home() {
                   initial={{ y: 40, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.22, duration: 0.4 }}
-                  className="text-2xl md:text-3xl text-zinc-300 mb-6 font-display uppercase tracking-widest text-outline-variant"
+                  className="text-xl md:text-3xl text-zinc-300 mb-6 font-display uppercase tracking-widest text-outline-variant leading-snug"
                 >
                   [ Code ] [ Cloud ] [ Craft ]
                 </motion.h2>
@@ -229,12 +229,12 @@ export default function Home() {
                   initial={{ y: 40, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.34, duration: 0.4 }}
-                  className="flex flex-wrap gap-4"
+                  className="flex flex-col md:flex-row gap-4"
                 >
-                  <Link href="/portfolio" className="bg-[#6C5CE7] text-[#0a0a0a] border-2 border-[#6C5CE7] px-8 py-3 hover:bg-[#0a0a0a] hover:text-[#6C5CE7] transition-all rounded-sm font-mono text-sm uppercase font-bold hover:-translate-y-1 hover:translate-x-1 hover:shadow-[-6px_6px_0px_0px_#6C5CE7]">
+                  <Link href="/portfolio" className="bg-[#6C5CE7] text-[#0a0a0a] border-2 border-[#6C5CE7] px-8 py-3 hover:bg-[#0a0a0a] hover:text-[#6C5CE7] transition-all rounded-sm font-mono text-sm uppercase font-bold hover:-translate-y-1 hover:translate-x-1 hover:shadow-[-6px_6px_0px_0px_#6C5CE7] text-center w-full md:w-auto">
                     Explore Work →
                   </Link>
-                  <Link href="/contact" className="border-2 border-[#6C5CE7] text-[#6C5CE7] px-8 py-3 hover:bg-[#6C5CE7] hover:text-[#0a0a0a] transition-all rounded-sm font-mono text-sm uppercase font-bold hover:-translate-y-1 hover:translate-x-1 hover:shadow-[-6px_6px_0px_0px_rgba(108,92,231,0.5)]">
+                  <Link href="/contact" className="border-2 border-[#6C5CE7] text-[#6C5CE7] px-8 py-3 hover:bg-[#6C5CE7] hover:text-[#0a0a0a] transition-all rounded-sm font-mono text-sm uppercase font-bold hover:-translate-y-1 hover:translate-x-1 hover:shadow-[-6px_6px_0px_0px_rgba(108,92,231,0.5)] text-center w-full md:w-auto">
                     Init Contact
                   </Link>
                 </motion.div>
