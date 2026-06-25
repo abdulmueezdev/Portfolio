@@ -5,17 +5,17 @@ const socialLinks = [
   {
     label: 'GitHub',
     href: 'https://github.com/abdulmueezdev',
-    icon: <FaGithub size={18} />,
+    icon: <FaGithub className="w-[18px] h-[18px] md:w-6 md:h-6" />,
   },
   {
     label: 'LinkedIn',
     href: 'https://www.linkedin.com/in/abdulmueezdev/',
-    icon: <FaLinkedinIn size={18} />,
+    icon: <FaLinkedinIn className="w-[18px] h-[18px] md:w-6 md:h-6" />,
   },
   {
     label: 'Instagram',
     href: 'https://www.instagram.com/abdul.mueez.shahid/',
-    icon: <FaInstagram size={18} />,
+    icon: <FaInstagram className="w-[18px] h-[18px] md:w-6 md:h-6" />,
   },
 ]
 
@@ -30,8 +30,8 @@ export default function Footer() {
       </div>
 
       {/* Bottom row: social icons left, copyright + admin right */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-6">
+      <div className="flex flex-wrap items-center justify-between gap-8">
+        <div className="flex items-center gap-6 md:gap-8">
           {socialLinks.map(link => (
             <a
               key={link.label}
@@ -46,7 +46,7 @@ export default function Footer() {
           ))}
         </div>
         <div className="flex flex-col items-end gap-3">
-          <p className="text-xs text-zinc-600">
+          <p className="text-xs text-zinc-600 text-right">
             © 2025 Abdul-Mueez. Built with Logic & Design.
           </p>
         </div>
