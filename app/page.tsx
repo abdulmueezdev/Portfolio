@@ -168,13 +168,15 @@ export default function Home() {
                 className="absolute top-1/2 left-1/4 -translate-y-1/2 text-left flicker-in"
                 exit={{ opacity: 0 }}
               >
-                <span className="font-mono text-sm text-[#55E6C1] block mb-2 border-b border-[#55E6C1] pb-1 w-max">
-                  &gt;&gt; SYSTEM_HALTED
-                </span>
-                <p className="font-mono text-sm text-zinc-400 flex items-center gap-2 mt-4 hover:text-[#55E6C1] transition-colors">
-                  <span className="text-[#55E6C1]">&gt;</span>
-                  EXECUTE_BOOT_SEQUENCE
-                </p>
+                <div className="flex flex-col gap-2 w-full max-w-[250px] sm:max-w-none">
+                  <span className="font-mono text-xs sm:text-sm text-[#55E6C1] block mb-2 border-b border-[#55E6C1] pb-1 w-fit whitespace-normal break-words">
+                    &gt;&gt; SYSTEM_HALTED
+                  </span>
+                  <p className="font-mono text-xs sm:text-sm text-zinc-400 flex items-start sm:items-center gap-2 mt-2 hover:text-[#55E6C1] transition-colors whitespace-normal break-words">
+                    <span className="text-[#55E6C1] shrink-0 mt-0.5 sm:mt-0">&gt;</span>
+                    <span>EXECUTE_BOOT_SEQUENCE</span>
+                  </p>
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
