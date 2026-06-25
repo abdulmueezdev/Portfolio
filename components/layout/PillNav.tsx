@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 export function useScrollDirection() {
   const [dir, setDir] = useState<'up' | 'down'>('up')
@@ -17,8 +18,16 @@ export function useScrollDirection() {
   return dir
 }
 
+const navItems = [
+  { name: 'Home', path: '/' },
+  { name: 'About', path: '/about' },
+  { name: 'Portfolio', path: '/portfolio' },
+  { name: 'Contact', path: '/contact' },
+]
+
 export default function PillNav({ isVisible = true }: { isVisible?: boolean }) {
   const dir = useScrollDirection()
+  const pathname = usePathname()
   
   return (
     <nav className={`
@@ -31,10 +40,21 @@ export default function PillNav({ isVisible = true }: { isVisible?: boolean }) {
       ${!isVisible ? 'opacity-0 pointer-events-none translate-y-4' : 'opacity-100'}
       ${dir === 'down' && isVisible ? '-translate-y-24' : 'translate-y-0'}
     `}>
-      <Link href="/" className="text-sm hover:text-[#55E6C1] transition-colors">Home</Link>
-      <Link href="/about" className="text-sm hover:text-[#55E6C1] transition-colors">About</Link>
-      <Link href="/portfolio" className="text-sm hover:text-[#55E6C1] transition-colors">Portfolio</Link>
-      <Link href="/contact" className="text-sm hover:text-[#55E6C1] transition-colors">Contact</Link>
+      {navItems.map((item) => {
+        const isActive = pathname === item.path
+        return (
+          <Link 
+            key={item.path} 
+            href={item.path} 
+            className={`text-sm transition-colors relative ${isActive ? 'text-[#55E6C1] font-medium' : 'text-zinc-300 hover:text-[#55E6C1]'}`}
+          >
+            {item.name}
+            {isActive && (
+              <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-[#55E6C1] rounded-full"></span>
+            )}
+          </Link>
+        )
+      })}
     </nav>
   )
 }
